@@ -1,5 +1,4 @@
-import { File } from "./File";
-import {  AudioFileFactory, FileFactory, ImageFileFactory, VideoFileFactory } from "./FileFactory";
+import { AudioFileFactory, FileFactory, ImageFileFactory, VideoFileFactory } from "./FileFactory";
 
 export enum FileType {
   Audio, 
@@ -7,28 +6,14 @@ export enum FileType {
   Video
 }
 
-export class Factory {
-  private fileFactory: FileFactory;
-
-  constructor() {}
-
-  init(fileType: FileType) {
-    switch (fileType) {
-      case FileType.Audio:
-        this.fileFactory = new AudioFileFactory();
-        break;
-      case FileType.Image:
-        this.fileFactory = new ImageFileFactory();
-        break;
-      case FileType.Video:
-        this.fileFactory = new VideoFileFactory();
-        break;
-      default:
-        throw new Error("Invalid file type");
-    }
+export function createFile(fileType: FileType): FileFactory {
+  if (fileType === FileType.Audio) {
+    return new AudioFileFactory();
+  } else if (fileType === FileType.Image) {
+    return new ImageFileFactory();
+  } else if (fileType === FileType.Video) {
+    return new VideoFileFactory();
   }
-
-  createFile(fileName: string): File {
-    return this.fileFactory.createFile(fileName);
-  }
+  throw new Error("Invalid file type");
 }
+

@@ -1,18 +1,11 @@
-import { Factory, FileType } from "./Factory";
+import { FileType, createFile } from "./Factory";
 
-const factory = new Factory();
-
-factory.init(FileType.Audio);
+const factory = createFile(FileType.Audio);
 const audioFile = factory.createFile("audio.mp3");
 audioFile.open();
 audioFile.close();
 
-factory.init(FileType.Image);
-const imageFile = factory.createFile("image.jpg");
-imageFile.open();
-imageFile.close();
-
-factory.init(FileType.Video);
-const videoFile = factory.createFile("video.mp4");
-videoFile.open();
-videoFile.close();
+const factory2 = createFile(FileType.Video);
+const mediaFile = factory2.createFile("video.mp4");
+mediaFile.open();
+mediaFile.close();
