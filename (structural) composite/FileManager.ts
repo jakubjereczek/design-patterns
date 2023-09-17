@@ -1,4 +1,4 @@
-import { File } from './File';
+import { File, TextFile } from './File';
 import { Folder } from './Folder';
 
 /** client */
@@ -10,9 +10,12 @@ export class FileManager {
     name: string,
     ext: string,
     idx: string,
+    encoding = 'none',
     folder?: Folder,
   ): File {
-    const object = new File(size, name, ext, idx);
+    const object = encoding !== 'none'
+      ? new TextFile(size, name, ext, idx, encoding)
+      : new File(size, name, ext, idx);
     if (folder) {
       folder.add(object);
     } else {
@@ -33,8 +36,7 @@ export class FileManager {
     return object;
   }
 
-  getInfo() {
+  display() {
     this.root.display();
-    console.log('Total size: ' + this.root.getSize());
   }
 }

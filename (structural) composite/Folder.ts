@@ -35,13 +35,17 @@ export class Folder implements Component {
     return this.name;
   }
 
+  getInfo(): string {
+    return `Folder: ${this.getName()}, total size: ${this.getSize()} bytes`;
+  }
+
   display(indentation: string = ''): void {
-    console.log(indentation + `Folder: ${this.name}, Size: ${this.getSize()} bytes`);
+    console.log(indentation + this.getInfo());
     for (const child of this.children) {
       if (child instanceof File) {
-        console.log(indentation + `  File: ${child.getName()}, Size: ${child.getSize()} bytes`);
+        console.log(indentation + ' ' + child.getInfo());
       } else if (child instanceof Folder) {
-        child.display(indentation + '  ');
+        child.display(indentation + ' ');
       }
     }
   }
