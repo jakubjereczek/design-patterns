@@ -46,3 +46,36 @@ console.log('after composed', textEditor.getInfo());
 invoker2.undoCommand();
 invoker2.undoCommand();
 console.log('multiple undo', textEditor.getInfo())
+
+// an example use case
+export class TextEditor {
+  private invoker = new Invoker<typeof this>();
+
+  constructor() {} //...
+
+  getInfo() {
+    return {
+      //...
+    };
+  }
+
+  clone() {
+    return new TextEditor();
+    // ...
+  }
+
+  onShortcut(shortcut: string) {
+    switch (shortcut) {
+      case 'Ctrl+B':
+        this.invoker.executeCommand(new UppercaseCommand(this));
+      case 'Ctrl+C':
+        this.invoker.executeCommand(
+          new FontSizeCommand(this, {
+            increase: true,
+          }),
+        );
+      case 'Ctrl-Z':
+        this.invoker.undoCommand();
+    }
+  }
+}
