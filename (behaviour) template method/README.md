@@ -1,0 +1,2 @@
+# When to use?
+Use the Template Method pattern when you want to define the overall structure of an algorithm in a base class while allowing subclasses to override specific steps without altering the structure.
