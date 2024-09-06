@@ -1,0 +1,2 @@
+# When to use?
+Use the Visitor pattern when you need to perform operations on objects of a complex structure (e.g., a tree) without modifying their class, allowing you to keep the operation logic separate from the object structure.
